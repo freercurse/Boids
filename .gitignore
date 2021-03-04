@@ -1,0 +1,11 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\thoma\OneDrive\HOPE\AI\Portfolio Exersizes\4\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/.idea
+/venv
+/__pycache__
