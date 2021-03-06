@@ -1,6 +1,6 @@
 # DONE define a fish so i can call update on it and pass in a bunch of inputs and it'll update its pos
 # DONE manage the core game loop so it'll draw everything
-# todo wander
-# todo Collision Avoidance: avoid collisions with nearby flock mates
-# todo Velocity Matching: attempt to match velocity with nearby flock mates
-# todo Flock Centering: attempt to stay close to nearby flock mates
+# DONE wander
+# DONE Flock Centering: attempt to stay close to nearby flock mates
+# todo: make the shark
+# todo: run from the shark
