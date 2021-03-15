@@ -1,6 +1,6 @@
 # This is the portfolio 4 for the AI coursework 1st year Hope uni
 
-###the features of this work
+##the features of this work
  - A Python implementation of **Boids** which has:
    - **Alignment**: steer towards the average heading of local flockmates 
      - When they are aligned they **average the surrounding colours** to signify that they are aligned
@@ -12,4 +12,4 @@ Download main.zip then extract it and run main.exe. If the EXE does not work you
 
 > https://1drv.ms/u/s!AhKDfKsG6_tQmKxGRHG79rc3hojKQw?e=HjdC3F
 
-###- Biddls
+##- Biddls
