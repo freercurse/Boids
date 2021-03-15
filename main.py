@@ -12,6 +12,8 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((dims['width'], dims['height']))
 running = True
 
+
+
 # Instantiate player.
 fish = [Fish(dims) for x in range(100)]
 

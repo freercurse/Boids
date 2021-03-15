@@ -98,7 +98,7 @@ class Fish(pygame.sprite.Sprite):
             avxy = [self.rect.x - temp[0], self.rect.y - temp[1]]
         else:
             avxy = [0, 0]
-        if abs(diff) < 1:
+        if 0 < abs(diff) < 1:
             diff = 1 * (diff/diff)
 
         if len(close) == 0:
