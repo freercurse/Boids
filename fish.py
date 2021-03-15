@@ -63,9 +63,9 @@ class Fish(pygame.sprite.Sprite):
             dist = fishDist(self, fishy, self.dims)
             if self.toClose <= dist <= self.dist:
                 inRange.append(fishy)
-                pygame.draw.line(screen, (3, 3, 3),
+                pygame.draw.line(screen, (50, 50, 50),
                                  (self.rect.x + self.rect.width/2, self.rect.y + self.rect.height/2),
-                                 (fishy.rect.x + fishy.rect.width/2, fishy.rect.y + fishy.rect.height/2))
+                                 (fishy.rect.x + fishy.rect.width/2, fishy.rect.y + fishy.rect.height/2), 2)
 
         avDir = 0
         close = []
