@@ -11,3 +11,5 @@ the features of this work
 Download main.zip then extract it and run main.exe. If the EXE does not work you can see a recording of the content in the zip file below
 
 > https://1drv.ms/u/s!AhKDfKsG6_tQmKxGRHG79rc3hojKQw?e=HjdC3F
+
+download Fish.exe and if that doesnt work dowload the zipped version and try that
