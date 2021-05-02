@@ -1,12 +1,10 @@
-import numpy as np
-import pygame
 import math
-from pygame.locals import *
 import random
+import pygame
 from util import catDist
 
 
-class Mouse(pygame.sprite.Sprite):
+class Cat(pygame.sprite.Sprite):
     def __init__(self, envSize):
         # Call the parent class (Sprite) constructor
         super().__init__()
@@ -19,18 +17,18 @@ class Mouse(pygame.sprite.Sprite):
         self.sameDir = 70
         self.toClose = self.dist * 0.4
 
-        self.surf = pygame.Surface((10, 20))
+        self.surf = pygame.Surface((15, 25))
         self.surf.set_colorkey((0, 0, 0))
-        self.ogColour = (0,255,0)
+        self.ogColour = (255,0,0)
         self.surf.fill(self.ogColour)
 
         self.rect = self.surf.get_rect()
         self.rect.x = envSize['width'] * random.random()
         self.rect.y = envSize['height'] * random.random()
 
-    def update(self, screen, mouse,cat):
+    def update(self, screen, cat,mouse):
         # given the env inputs what does it want to do
-        temp, forward, ideal = self.move(mouse,cat, screen)
+        temp, forward, ideal = self.move(cat,mouse, screen)
 
         self.turning += temp
         self.turning = 0 if abs(self.turning) > 5 else self.turning
@@ -57,16 +55,16 @@ class Mouse(pygame.sprite.Sprite):
 
         screen.blit(temp, self.rect)
 
-    def move(self, mouse,cat, screen):
+    def move(self, cat,mouse, screen):
         inRange = []
-        for mouses in mouse:
-            for cats in cat:
+        for cats in cat:
+            for mouses in mouse:
                 dist = catDist(mouses, cats, self.dims)
                 if self.toClose <= dist <= self.dist:
                     inRange.append(mouses)
-                    # pygame.draw.line(screen, (50, 50, 50),
-                    #                  (self.rect.x + self.rect.width / 2, self.rect.y + self.rect.height / 2),
-                    #                  (cats.rect.x + cats.rect.width / 2, cats.rect.y + cats.rect.height / 2), 2)
+                    pygame.draw.line(screen, (50, 50, 50),
+                                     (cats.rect.x + cats.rect.width/2, cats.rect.y + cats.rect.height/2),
+                                     (mouses.rect.x + mouses.rect.width/2, mouses.rect.y + mouses.rect.height/2), 2)
 
         avDir = 0
         close = []
@@ -84,9 +82,9 @@ class Mouse(pygame.sprite.Sprite):
 
         avColour = [0, 0, 0]
         scalar = 0.75
-        for mouses in close:
-            avColour = [x + y for x, y in zip(mouses.ogColour, avColour)]
-            avxy.append([mouses.rect.x / (scalar * len(close)), mouses.rect.y / (scalar * len(close))])
+        for cats in close:
+            avColour = [x + y for x, y in zip(cats.ogColour, avColour)]
+            avxy.append([cats.rect.x / (scalar * len(close)), cats.rect.y / (scalar * len(close))])
 
         if len(close) > 0:
             self.surf.fill([(x/len(close)) for x in avColour])
