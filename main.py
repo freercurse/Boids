@@ -1,44 +1,65 @@
-# https://github.com/futurelucas4502
+import pygame as pg
+from pygame import USEREVENT
 
-import pygame
-from mouse import Mouse
-from cat import Cat
-from util import excluded
+from Cat import Cat
+from Mouse import Mouse
 
-# Initialise
-# dims = {'width': 500, 'height': 500}
-dims = {'width': 1920, 'height': 1080}
-pygame.init()
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((dims['width'], dims['height']))
-running = True
-
+class main():
+    def __init__(self):
+        super(self)
+        screen = pg.display.get_surface()
+        self.width = 800
+        self.height = 600
+        self.fps = 60
+        self.counter = 0
 
 
-# Instantiate player.
-mouse = [Mouse(dims) for x in range(10)]
-cat = [Cat(dims) for x in range(2)]
+    def start(self):
+        pg.init()
+        cat = Cat()
+        mouse = Mouse()
+        screen = pg.display.set_mode((1024, 768))
+        clock = pg.time.Clock()
+        running = True
+        sprite = pg.sprite.Group()
+        sprite.add(cat)
+        sprite.add(mouse)
+        calcCoords = USEREVENT + 1
 
-while running:
-    # Set FPS
-    clock.tick(20)
+        pg.time.set_timer(calcCoords, 50)
 
-    # Main game
-    screen.fill((0, 0, 0))
-    rng = mouse[0].dist
 
-    pygame.draw.line(screen, (255, 0, 0), (rng/2, rng/2), (rng/2, dims['height'] - rng/2))
-    pygame.draw.line(screen, (255, 0, 0), (rng/2, dims['height'] - rng/2), (dims['width'] - rng/2, dims['height'] - rng/2))
-    pygame.draw.line(screen, (255, 0, 0), (dims['width'] - rng/2, dims['height'] - rng/2), (dims['width'] - rng/2, rng/2))
-    pygame.draw.line(screen, (255, 0, 0), (dims['width'] - rng/2, rng/2), (rng/2, rng/2))
+        while running:
 
-    [mouses.update(screen,cat, others) for mouses, others in zip(mouse, excluded(mouse))]
-    [cats.update(screen,mouse, others) for cats, others in zip(cat, excluded(cat))]
+            if pg.event.get(calcCoords):
+                mouse.calcCoords()
+                cat.calcCoords()
 
-    # Event Handling
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+            sprite.update([cat.pos,mouse.pos])
+            self.AuraDetection([cat.pos, mouse.pos], cat, mouse)
+            clock.tick(60)
+            pg.display.set_caption("{:.2f}".format(clock.get_fps()))
+            screen.fill((250, 250, 250))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    running = False
 
-    # Update screen
-    pygame.display.update()
+
+            sprite.draw(screen)
+            pg.display.flip()
+
+    def AuraDetection(self, animals, cat, mouse):
+        if abs(animals[0][0] - animals[1][0]) <= 150 and abs(animals[0][1] - animals[1][1]) <= 150 and self.counter == 0:
+            cat.StateChange()
+            self.counter = 1
+
+
+
+
+
+
+if __name__ == '__main__':
+    main.start(main)
+
+
+
